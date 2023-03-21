@@ -19,5 +19,5 @@ export class User {
   isAdmin: boolean;
 
   @OneToMany(() => Link, (link) => link.user, { cascade: ['insert', 'update'] })
-  reviews: Relation<Link>[];
+  links: Relation<Link>[];
 }

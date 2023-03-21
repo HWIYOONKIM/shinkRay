@@ -10,11 +10,11 @@ export class Link {
   originalUrl: string;
 
   @Column()
-  lastAccessedOn: Date;
+  lastAccessedOn: string;
 
   @Column({ default: 0 })
   numHits: number;
 
-  @ManyToOne(() => User, (user) => user.reviews, { cascade: ['insert', 'update'] })
+  @ManyToOne(() => User, (user) => user.links, { cascade: ['insert', 'update'] })
   user: Relation<User>;
 }

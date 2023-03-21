@@ -3,3 +3,12 @@ type DatabaseConstraintError = {
   columnName?: string;
   message?: string;
 };
+
+type AuthRequest = {
+  username: string;
+  password: string;
+};
+
+type UserNameParam = {
+  targetUserName: string;
+};
