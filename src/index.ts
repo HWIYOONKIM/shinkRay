@@ -20,9 +20,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-
 app.use(express.json());
-
 // Implement endpoints here
 app.post('/api/users', registerUser); // Create an account
 app.post('/api/login', logIn); // Log in to an account
