@@ -6,15 +6,18 @@ export class Link {
   @PrimaryColumn()
   linkId: string;
 
-  @Column()
+  @Column({ default: '' })
   originalUrl: string;
-
-  @Column()
-  lastAccessedOn: string;
 
   @Column({ default: 0 })
   numHits: number;
 
+  @Column()
+  lastAccessedOn: Date;
+
   @ManyToOne(() => User, (user) => user.links, { cascade: ['insert', 'update'] })
   user: Relation<User>;
+
+  @ManyToOne(() => User, (user) => user.createdLinks, { cascade: ['insert', 'update'] })
+  creator: Relation<User>;
 }
