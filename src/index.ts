@@ -4,7 +4,12 @@ import express, { Express } from 'express';
 import session from 'express-session';
 import connectSqlite3 from 'connect-sqlite3';
 import { registerUser, logIn } from './controllers/UserController';
-import { shortenUrl, getOriginalUrl, getLinksForUser } from './controllers/LinkController';
+import {
+  shortenUrl,
+  getOriginalUrl,
+  getLinksForUser,
+  deleteLink,
+} from './controllers/LinkController';
 
 const app: Express = express();
 const { PORT, COOKIE_SECRET } = process.env;
@@ -28,6 +33,7 @@ app.post('/api/login', logIn); // Log in to an account
 app.post('/api/links', shortenUrl); // Create a new shortened link
 app.get('/:linkId', getOriginalUrl); // Visit a shortended link
 app.get('/api/users/:userId/links', getLinksForUser); // Get all links for the target user
+app.delete('/api/users/:userId/links/:linkId', deleteLink); // Delete the specified link
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);
 });

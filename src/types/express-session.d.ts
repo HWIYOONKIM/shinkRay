@@ -8,6 +8,8 @@ declare module 'express-session' {
       userId: string;
       username: string;
     };
+    isAdmin: boolean;
+    isPro: boolean;
     isLoggedIn: boolean;
   }
 }

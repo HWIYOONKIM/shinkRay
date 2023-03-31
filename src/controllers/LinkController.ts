@@ -6,6 +6,7 @@ import {
   updateLinkVisits,
   getLinksByUserId,
   getLinksByUserIdForOwnAccount,
+  deleteLinkById,
 } from '../models/LinkModel';
 import { getUserById } from '../models/UserModel';
 import { parseDatabaseError } from '../utils/db-utils';
@@ -106,4 +107,37 @@ async function getLinksForUser(req: Request, res: Response): Promise<void> {
   }
 }
 
-export { shortenUrl, getOriginalUrl, getLinksForUser };
+type LinkIdParam = {
+  linkId: string;
+};
+async function deleteLink(req: Request, res: Response): Promise<void> {
+  const { linkId } = req.params as LinkIdParam;
+  const { isLoggedIn, isAdmin, authenticatedUser } = req.session;
+
+  if (!isLoggedIn) {
+    res.status(401).send('User not logged in.');
+    return;
+  }
+
+  try {
+    const link = await getLinkById(linkId);
+
+    if (!link) {
+      res.status(404).send('Link not found');
+      return;
+    }
+
+    if (isAdmin || link.user.userId === authenticatedUser.userId) {
+      await deleteLinkById(linkId);
+      res.sendStatus(200);
+    } else {
+      res.status(403).send('User not authorized to delete this link');
+    }
+  } catch (err) {
+    console.error(err);
+    const databaseErrorMessage = parseDatabaseError(err);
+    res.status(500).json(databaseErrorMessage);
+  }
+}
+
+export { shortenUrl, getOriginalUrl, getLinksForUser, deleteLink };
