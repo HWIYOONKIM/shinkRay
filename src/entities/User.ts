@@ -13,14 +13,11 @@ export class User {
   passwordHash: string;
 
   @Column({ default: false })
-  isAdmin: boolean;
+  isPro: boolean;
 
   @Column({ default: false })
-  isPro: boolean;
+  isAdmin: boolean;
 
   @OneToMany(() => Link, (link) => link.user, { cascade: ['insert', 'update'] })
   links: Relation<Link>[];
-
-  @OneToMany(() => Link, (link) => link.creator, { cascade: ['insert', 'update'] })
-  createdLinks: Relation<Link>[];
 }

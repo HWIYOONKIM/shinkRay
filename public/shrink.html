@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Shrink a Link with Shrink Ray">
+    <meta name="keywords" content="link, shrink ray">
+    <title>Shrink a Link | Shrink Ray</title>
+</head>
+<body>
+    <div class="formCard">
+        <section class="form-container">
+            <div>
+                <h1 class="title gradient-text">Shrink Ray</h1>
+                <h2>Shrink a Link</h2>
+            </div>
+            <div class="form">
+                <form method="POST" action="/api/links">
+                    <label for="originalUrl">Original URL</label>
+                    <input type="url" id="originalUrl" name="originalUrl" class="originalUrl" placeholder="Original URL" required>
+
+                    <button type="submit" class="btn">Shrink It!</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
